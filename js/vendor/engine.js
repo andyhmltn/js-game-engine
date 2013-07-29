@@ -20,6 +20,8 @@ var GameEngineScene = function(width,height,canvas) {
 
 GameEngineScene.prototype.add_object = function(options) {
   this.objects[options.id] = new GameEngineObject(this.ctx, options);
+
+  return this.objects[options.id];
 }
 
 GameEngineScene.prototype.draw = function() {

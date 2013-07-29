@@ -9,7 +9,7 @@
       var canvas = document.getElementById('the-canvas');
       var scene = new GameEngineScene(500,500, canvas);
 
-      scene.add_object({
+      var character = scene.add_object({
         id: 'ball',
         radius  : 10,
         x       : 100,
@@ -17,20 +17,32 @@
         bouncy  : false
       });
 
-      scene.add_object({
-        id: 'bouncy_ball',
-        radius : 5,
-        x : 400,
-        y : 100,
-        bouncy: true
-      });
+      for(var i=0; i<10; i++) {
+        scene.add_object({
+          id: 'bouncy'+i,
+          radius: 5,
+          x : 300 + (i*25),
+          y : 100 - i,
+          bouncy: true
+        });
+      }
+
+      // ----------------------
+      // 
+      // Instead of using the assigned
+      // object (`character`) you can
+      // also use `scene.find_object(object_id)`
+      // which will return an object based on
+      // its ID where it matches `object_id`
+      // 
+      // ----------------------
 
       scene.when_key_pressed(39, function() {
-        scene.find_object('ball').move('x', 4);
+        character.move('x', 4);
       });
 
       scene.when_key_pressed(37, function() {
-        scene.find_object('ball').move('x', -4)
+        character.move('x', -4)
       })
 
       scene.run();
