@@ -13,8 +13,16 @@
         id: 'ball',
         radius  : 10,
         x       : 100,
-        y       : 100,
-        bouncy  : true
+        y       : 450,
+        bouncy  : false
+      });
+
+      scene.add_object({
+        id: 'bouncy_ball',
+        radius : 5,
+        x : 400,
+        y : 100,
+        bouncy: true
       });
 
       scene.when_key_pressed(39, function() {
