@@ -1,3 +1,8 @@
+// Helper methods
+// ------------------
+Array.prototype.each = function(callback){for(i = 0; i < this.length; i++){callback(i, this[i]);}}
+// ------------------
+
 var GameEngineScene = function(width,height,canvas) {
   this.width  = width;
   this.height = height;
@@ -5,24 +10,24 @@ var GameEngineScene = function(width,height,canvas) {
   this.canvas = canvas;
   this.ctx    = this.canvas.getContext('2d'); 
 
-  this.objects = [];
+  this.objects = {};
   this.clear_canvas = function() {
     this.ctx.clearRect(0,0,this.width,this.height);
   }
 }
 
 GameEngineScene.prototype.add_object = function(options) {
-  this.objects.push(new GameEngineObject(this.ctx, options));
+  this.objects[options.id] = new GameEngineObject(this.ctx, options);
 }
 
 GameEngineScene.prototype.draw = function() {
   _self = this;
   _self.clear_canvas();
 
-  for(var i = 0; i<_self.objects.length; i++) {
-    _self.objects[i].draw();
-    _self.objects[i].update_position();
-  }
+  Object.keys(_self.objects).each(function(key, value) {
+    _self.objects[value].draw();
+    _self.objects[value].update_position();
+  });
 }
 
 GameEngineScene.prototype.run = function() {
