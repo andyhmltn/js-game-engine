@@ -15,7 +15,8 @@ GameEngineScene.prototype.add_object = function(options) {
   this.objects.push(new GameEngineObject(this.ctx, options));
 }
 
-GameEngineScene.prototype.draw = function(_self) {
+GameEngineScene.prototype.draw = function() {
+  _self = this;
   _self.clear_canvas();
 
   for(var i = 0; i<_self.objects.length; i++) {
@@ -28,10 +29,10 @@ GameEngineScene.prototype.run = function() {
   var _self = this;
 
   _self.clear_canvas();
-  _self.draw(_self);
+  _self.draw();
 
   setInterval(function() {
-    _self.draw(_self);
+    _self.draw();
   }, 5);
 }
 
