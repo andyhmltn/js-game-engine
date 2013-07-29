@@ -10,6 +10,8 @@ var GameEngineScene = function(width,height,canvas) {
   this.canvas = canvas;
   this.ctx    = this.canvas.getContext('2d'); 
 
+  this.keydownevents = {};
+
   this.objects = {};
   this.clear_canvas = function() {
     this.ctx.clearRect(0,0,this.width,this.height);
@@ -28,6 +30,23 @@ GameEngineScene.prototype.draw = function() {
     _self.objects[value].draw();
     _self.objects[value].update_position();
   });
+}
+
+GameEngineScene.prototype.when_key_pressed = function(key, callback) {
+  _self = this;
+
+  _self.keydownevents[key] = callback;
+
+  document.onkeydown = function(e) {
+    Object.keys(_self.keydownevents).each(function(key, value) {
+      if(e.which == value)
+        _self.keydownevents[value]();
+    });
+  }
+}
+
+GameEngineScene.prototype.find_object = function(id) {
+  return this.objects[id];
 }
 
 GameEngineScene.prototype.run = function() {
@@ -87,4 +106,11 @@ GameEngineObject.prototype.update_position = function() {
   }
 
   this.draw();
+}
+
+GameEngineObject.prototype.move = function(direction, amount) {
+  if(direction == 'x')
+    this.x += amount;
+
+  console.log(this.x);
 }

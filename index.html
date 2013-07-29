@@ -17,6 +17,14 @@
         bouncy  : true
       });
 
+      scene.when_key_pressed(39, function() {
+        scene.find_object('ball').move('x', 4);
+      });
+
+      scene.when_key_pressed(37, function() {
+        scene.find_object('ball').move('x', -4)
+      })
+
       scene.run();
     }
   </script>
