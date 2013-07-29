@@ -44,6 +44,8 @@ var GameEngineObject = function(ctx, options) {
     y: 0
   };
 
+  this.bouncy = options.bouncy || false;
+
   this.x = options.x;
   this.y = options.y;
 
@@ -70,8 +72,14 @@ GameEngineObject.prototype.update_position = function() {
     this.y += this.velocity.y;
   }
 
-  if(this.bottom() >= 500)
-    this.velocity.y *= -0.95;
+  if(this.bottom() >= 500) {
+    if(this.bouncy)
+      this.velocity.y *= -0.95;
+    else {
+      this.velocity.y = 0;
+      this.colliding  = true;
+    }
+  }
 
   this.draw();
 }
