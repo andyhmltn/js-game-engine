@@ -3,10 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <title>Ball Canvas Test</title>
+  <script src="js/vendor/engine.js"></script>
+  <script>
+    window.onload = function() {
+      var canvas = document.getElementById('the-canvas');
+      var scene = new GameEngineScene(500,500, canvas);
+
+      scene.add_object({
+        template: 'ball',
+        radius  : 10,
+        x       : 100,
+        y       : 100
+      });
+
+      scene.run();
+    }
+  </script>
 </head>
 <body>
   <canvas id="the-canvas" width="500px" height="500px"></canvas>
-
-  <script src="app.js"></script>
 </body>
 </html>
