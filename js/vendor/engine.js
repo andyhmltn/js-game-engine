@@ -113,6 +113,8 @@ GameEngineObject.prototype.update_position = function() {
 GameEngineObject.prototype.move = function(direction, amount) {
   if(direction == 'x')
     this.x += amount;
+  if(direction == 'y')
+    this.y += amount;
 
   console.log(this.x);
 }
